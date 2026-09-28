@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Trading Journal">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.json">
+<title>Trading Journal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>📊 Trading Journal</h1>
+    <p>Mesure ta stratégie avant d'augmenter le risque.</p>
+  </div>
+</header>
+
+<main>
+<section class="stats grid">
+  <div class="card stat"><span>Trades</span><strong id="trades">0</strong></div>
+  <div class="card stat"><span>Win rate</span><strong id="winrate">0%</strong></div>
+  <div class="card stat"><span>Résultat (R)</span><strong id="totalR">0 R</strong></div>
+  <div class="card stat"><span>Profit FCFA</span><strong id="profitFcfa">0</strong></div>
+</section>
+
+<section class="card">
+<h2>➕ Nouveau trade</h2>
+<form id="tradeForm">
+<div class="formgrid">
+<label>Date<input id="date" type="date" required></label>
+<label>Heure<input id="time" type="time" required></label>
+<label>Actif<input id="asset" value="XAUUSD" required></label>
+<label>Session<select id="session"><option>Londres</option><option>New York</option><option>Asie</option><option>Autre</option></select></label>
+<label>Timeframe<select id="tf"><option>M5</option><option>M15</option><option>M30</option><option>H1</option><option>H4</option></select></label>
+<label>Direction<select id="direction"><option>BUY</option><option>SELL</option></select></label>
+<label>Risque (USD)<input id="risk" type="number" min="0" step="0.01" placeholder="Ex: 10"></label>
+<label>RR prévu<input id="plannedRR" type="number" min="0" step="0.1" placeholder="Ex: 2"></label>
+<label>Résultat<select id="result"><option>WIN</option><option>LOSS</option><option>BREAK-EVEN</option></select></label>
+<label>R réalisé<input id="realizedR" type="number" step="0.01" placeholder="Ex: 2 ou -1"></label>
+<label>Respect des règles ?<select id="rules"><option>Oui</option><option>Non</option></select></label>
+<label>État mental<select id="mental"><option>Calme</option><option>Confiant</option><option>Hésitant</option><option>Stressé</option><option>FOMO</option><option>Revenge</option></select></label>
+</div>
+<label>Setup / raison de l'entrée<textarea id="setup" rows="3" placeholder="Pourquoi as-tu pris ce trade ?"></textarea></label>
+<label>Ce que j'ai appris<textarea id="lesson" rows="3" placeholder="Leçon à retenir..."></textarea></label>
+<button class="primary" type="submit">Enregistrer le trade</button>
+</form>
+</section>
+
+<section class="card">
+<h2>🧪 Analyse de la stratégie</h2>
+<p class="muted">Ne juge pas ta stratégie sur 3 ou 5 trades. Cherche au moins 50 à 100 trades avec les mêmes règles. Le résultat en R permet de comparer les trades indépendamment de la taille du compte.</p>
+<div class="analysis grid">
+<div><span>Profit moyen / trade</span><b id="avgR">0 R</b></div>
+<div><span>Gains moyens</span><b id="avgWin">0 R</b></div>
+<div><span>Pertes moyennes</span><b id="avgLoss">0 R</b></div>
+<div><span>Expectancy</span><b id="expectancy">0 R</b></div>
+</div>
+</section>
+
+<section class="card">
+<div class="sectionHead"><h2>📋 Historique</h2><button id="exportBtn" class="secondary">⬇️ Exporter mes trades</button></div>
+<div class="tableWrap">
+<table>
+<thead><tr><th>Date</th><th>Actif</th><th>Dir.</th><th>Résultat</th><th>R</th><th></th></tr></thead>
+<tbody id="history"></tbody>
+</table>
+</div>
+<p id="empty" class="empty">Aucun trade enregistré.</p>
+</section>
+
+<section class="danger">
+<button id="clearBtn" class="dangerBtn">Effacer tout l'historique</button>
+</section>
+</main>
+
+<footer>Trading Journal • Données enregistrées localement sur cet appareil</footer>
+<script src="app.js"></script>
+</body>
+</html>
