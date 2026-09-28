@@ -1,10 +1,1 @@
-{
-  "name":"Trading Journal",
-  "short_name":"Trading Journal",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#080d18",
-  "theme_color":"#0b1020",
-  "description":"Journal de trading XAUUSD avec statistiques et historique.",
-  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
-}
+{"name":"Trading Journal PRO","short_name":"TJ PRO","start_url":"./","display":"standalone","background_color":"#070b14","theme_color":"#070b14","description":"Journal de trading professionnel","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}

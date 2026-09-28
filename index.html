@@ -1,84 +1,34 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Trading Journal">
-<link rel="apple-touch-icon" href="icon.svg">
-<link rel="manifest" href="manifest.json">
-<title>Trading Journal</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="topbar">
-  <div>
-    <h1>📊 Trading Journal</h1>
-    <p>Mesure ta stratégie avant d'augmenter le risque.</p>
-  </div>
-</header>
-
+<!doctype html><html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b14"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="TJ PRO">
+<link rel="apple-touch-icon" href="icon.svg"><link rel="manifest" href="manifest.json"><title>Trading Journal PRO</title><link rel="stylesheet" href="style.css">
+</head><body><div class="app">
+<header class="top"><div><div class="brand">TJ<span>PRO</span></div><div class="sub">Trading Journal • XAUUSD & marchés</div></div><button class="iconBtn" id="settingsBtn">⚙️</button></header>
+<nav class="tabs"><button class="tab active" data-page="dashboard">📊 Dashboard</button><button class="tab" data-page="trades">📋 Trades</button><button class="tab" data-page="calendar">📅 Calendrier</button><button class="tab" data-page="analysis">🎯 Analyse</button></nav>
 <main>
-<section class="stats grid">
-  <div class="card stat"><span>Trades</span><strong id="trades">0</strong></div>
-  <div class="card stat"><span>Win rate</span><strong id="winrate">0%</strong></div>
-  <div class="card stat"><span>Résultat (R)</span><strong id="totalR">0 R</strong></div>
-  <div class="card stat"><span>Profit FCFA</span><strong id="profitFcfa">0</strong></div>
-</section>
+<section id="dashboard" class="page active"><div class="hero"><div><p class="eyebrow">PERFORMANCE GLOBALE</p><h1 id="heroProfit">+0.00 R</h1><p id="heroR">0.00 R • 0 trades</p></div><button class="primary" id="newTradeTop">＋ Nouveau trade</button></div>
+<div class="metrics"><div class="metric"><small>WIN RATE</small><b id="mWin">0%</b></div><div class="metric"><small>PROFIT FACTOR</small><b id="mPF">0.00</b></div><div class="metric"><small>EXPECTANCY</small><b id="mExp">0.00 R</b></div><div class="metric"><small>MAX DRAWDOWN</small><b id="mDD">0.00 R</b></div></div>
+<div class="card"><div class="cardHead"><div><h2>Courbe de performance</h2><span>Evolution cumulative en R</span></div><select id="chartPeriod"><option value="all">Tout</option><option value="30">30 derniers</option><option value="10">10 derniers</option></select></div><canvas id="equityChart"></canvas></div>
+<div class="two"><div class="card"><div class="cardHead"><h2>Sessions</h2></div><div id="sessionBars"></div></div><div class="card"><div class="cardHead"><h2>Psychologie</h2></div><div id="mentalBars"></div></div></div>
+<div class="card"><div class="cardHead"><h2>Derniers trades</h2><button class="linkBtn" data-pagego="trades">Voir tout →</button></div><div id="recent"></div></div></section>
 
-<section class="card">
-<h2>➕ Nouveau trade</h2>
-<form id="tradeForm">
-<div class="formgrid">
-<label>Date<input id="date" type="date" required></label>
-<label>Heure<input id="time" type="time" required></label>
-<label>Actif<input id="asset" value="XAUUSD" required></label>
-<label>Session<select id="session"><option>Londres</option><option>New York</option><option>Asie</option><option>Autre</option></select></label>
-<label>Timeframe<select id="tf"><option>M5</option><option>M15</option><option>M30</option><option>H1</option><option>H4</option></select></label>
-<label>Direction<select id="direction"><option>BUY</option><option>SELL</option></select></label>
-<label>Risque (USD)<input id="risk" type="number" min="0" step="0.01" placeholder="Ex: 10"></label>
-<label>RR prévu<input id="plannedRR" type="number" min="0" step="0.1" placeholder="Ex: 2"></label>
-<label>Résultat<select id="result"><option>WIN</option><option>LOSS</option><option>BREAK-EVEN</option></select></label>
-<label>R réalisé<input id="realizedR" type="number" step="0.01" placeholder="Ex: 2 ou -1"></label>
-<label>Respect des règles ?<select id="rules"><option>Oui</option><option>Non</option></select></label>
-<label>État mental<select id="mental"><option>Calme</option><option>Confiant</option><option>Hésitant</option><option>Stressé</option><option>FOMO</option><option>Revenge</option></select></label>
-</div>
-<label>Setup / raison de l'entrée<textarea id="setup" rows="3" placeholder="Pourquoi as-tu pris ce trade ?"></textarea></label>
-<label>Ce que j'ai appris<textarea id="lesson" rows="3" placeholder="Leçon à retenir..."></textarea></label>
-<button class="primary" type="submit">Enregistrer le trade</button>
-</form>
-</section>
+<section id="trades" class="page"><div class="pageTitle"><div><h1>Mes trades</h1><p>Journal complet et détaillé.</p></div><button class="primary" id="newTrade">＋ Nouveau trade</button></div>
+<div class="filters card"><input id="search" placeholder="🔎 Rechercher actif, setup..."><select id="filterResult"><option value="">Tous résultats</option><option>WIN</option><option>LOSS</option><option>BREAK-EVEN</option></select><select id="filterSession"><option value="">Toutes sessions</option><option>Londres</option><option>New York</option><option>Asie</option><option>Autre</option></select></div><div class="card"><div id="tradeList"></div></div></section>
 
-<section class="card">
-<h2>🧪 Analyse de la stratégie</h2>
-<p class="muted">Ne juge pas ta stratégie sur 3 ou 5 trades. Cherche au moins 50 à 100 trades avec les mêmes règles. Le résultat en R permet de comparer les trades indépendamment de la taille du compte.</p>
-<div class="analysis grid">
-<div><span>Profit moyen / trade</span><b id="avgR">0 R</b></div>
-<div><span>Gains moyens</span><b id="avgWin">0 R</b></div>
-<div><span>Pertes moyennes</span><b id="avgLoss">0 R</b></div>
-<div><span>Expectancy</span><b id="expectancy">0 R</b></div>
-</div>
-</section>
+<section id="calendar" class="page"><div class="pageTitle"><div><h1>Calendrier</h1><p>Visualise tes journées de trading.</p></div></div><div class="card calendarCard"><div class="calHead"><button id="prevMonth">‹</button><h2 id="monthTitle"></h2><button id="nextMonth">›</button></div><div class="week"><b>L</b><b>M</b><b>M</b><b>J</b><b>V</b><b>S</b><b>D</b></div><div id="calendarGrid" class="calGrid"></div></div><div class="card" id="dayDetail"><h2>Sélectionne une journée</h2><p class="muted">Appuie sur une date.</p></div></section>
 
-<section class="card">
-<div class="sectionHead"><h2>📋 Historique</h2><button id="exportBtn" class="secondary">⬇️ Exporter mes trades</button></div>
-<div class="tableWrap">
-<table>
-<thead><tr><th>Date</th><th>Actif</th><th>Dir.</th><th>Résultat</th><th>R</th><th></th></tr></thead>
-<tbody id="history"></tbody>
-</table>
-</div>
-<p id="empty" class="empty">Aucun trade enregistré.</p>
-</section>
-
-<section class="danger">
-<button id="clearBtn" class="dangerBtn">Effacer tout l'historique</button>
-</section>
+<section id="analysis" class="page"><div class="pageTitle"><div><h1>Analyse de stratégie</h1><p>Mesure tes règles avant d'augmenter le risque.</p></div></div>
+<div class="metrics"><div class="metric"><small>TRADES</small><b id="aTrades">0</b></div><div class="metric"><small>GAINS MOYENS</small><b id="aWin">0 R</b></div><div class="metric"><small>PERTES MOYENNES</small><b id="aLoss">0 R</b></div><div class="metric"><small>R TOTAL</small><b id="aR">0 R</b></div></div>
+<div class="two"><div class="card"><h2>Setups</h2><div id="setupTable"></div></div><div class="card"><h2>Timeframes</h2><div id="tfTable"></div></div></div>
+<div class="card"><h2>Gestion du risque</h2><div class="riskGrid"><label>Capital ($)<input id="capital" type="number" value="1000"></label><label>Risque (%)<input id="riskPct" type="number" value="1" step=".1"></label><label>Stop Loss (points)<input id="slPoints" type="number" value="300"></label><label>RR cible<input id="targetRR" type="number" value="2" step=".1"></label></div><div class="riskResult"><b id="riskDollar">$10.00</b><span>risque autorisé</span><b id="lotHint">—</b><span>TP indicatif</span></div><p class="muted">Le lot exact XAUUSD dépend des spécifications du broker.</p></div></section>
 </main>
 
-<footer>Trading Journal • Données enregistrées localement sur cet appareil</footer>
-<script src="app.js"></script>
-</body>
-</html>
+<div id="modal" class="modal"><div class="modalBox"><div class="modalHead"><h2>➕ Nouveau trade</h2><button id="closeModal" class="iconBtn">✕</button></div>
+<form id="tradeForm"><div class="formGrid">
+<label>Date<input id="fDate" type="date" required></label><label>Heure<input id="fTime" type="time" required></label><label>Actif<input id="fAsset" value="XAUUSD" required></label>
+<label>Session<select id="fSession"><option>Londres</option><option>New York</option><option>Asie</option><option>Autre</option></select></label><label>Timeframe<select id="fTf"><option>M5</option><option>M15</option><option>M30</option><option>H1</option><option>H4</option></select></label><label>Direction<select id="fDir"><option>BUY</option><option>SELL</option></select></label>
+<label>Risque ($)<input id="fRisk" type="number" min="0" step=".01"></label><label>RR prévu<input id="fRR" type="number" min="0" step=".1"></label><label>Résultat<select id="fResult"><option>WIN</option><option>LOSS</option><option>BREAK-EVEN</option></select></label>
+<label>R réalisé<input id="fR" type="number" step=".01" required></label><label>Setup<input id="fSetup" placeholder="Breakout + retest"></label><label>Règles<select id="fRules"><option>Oui</option><option>Non</option></select></label>
+<label>État mental<select id="fMental"><option>Calme</option><option>Confiant</option><option>Hésitant</option><option>Stressé</option><option>FOMO</option><option>Revenge</option></select></label></div>
+<label>Raison de l'entrée<textarea id="fReason" rows="3"></textarea></label><label>Ce que j'ai appris<textarea id="fLesson" rows="3"></textarea></label><button class="primary full">Enregistrer le trade</button></form></div></div><div id="toast"></div><footer>Trading Journal PRO • Données stockées localement</footer></div><script src="app.js"></script></body></html>
